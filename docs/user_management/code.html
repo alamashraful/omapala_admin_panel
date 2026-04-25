@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Management - Admin Central</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#6b2e24",
+                        "on-secondary-container": "#5b6764",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-fixed-dim": "#ffb4a7",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#121e1c",
+                        "on-background": "#0b1c30",
+                        "surface": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "primary-fixed-dim": "#87d6bd",
+                        "tertiary-fixed": "#ffdad4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#002018",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#3b0904",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#106b56",
+                        "on-secondary-fixed-variant": "#3d4947",
+                        "on-tertiary-container": "#ffbfb4",
+                        "on-tertiary-fixed-variant": "#73342a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-fixed": "#a2f2d8",
+                        "tertiary-container": "#884439",
+                        "secondary-fixed-dim": "#bcc9c6",
+                        "on-primary-fixed-variant": "#005140",
+                        "outline": "#6f7975",
+                        "primary-container": "#006450",
+                        "inverse-primary": "#87d6bd",
+                        "on-error": "#ffffff",
+                        "secondary": "#55615e",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed": "#d8e5e1",
+                        "secondary-container": "#d8e5e1",
+                        "on-primary-container": "#8edec4",
+                        "outline-variant": "#bec9c3",
+                        "on-surface-variant": "#3f4945",
+                        "inverse-surface": "#213145",
+                        "primary": "#004a3a",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "table-header": ["Inter"],
+                        "mono": ["monospace"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-sm": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "14px", "fontWeight": "700"}],
+                        "table-header": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "mono": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "h2": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #004d3e; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-60 border-r border-teal-900 fixed left-0 top-0 bg-[#006450] dark:bg-slate-950 shadow-xl flex flex-col z-40">
+<div class="p-6">
+<h1 class="text-xl font-bold tracking-tight text-white font-display-sm">Admin Central</h1>
+<p class="text-[10px] text-teal-300 uppercase tracking-widest font-bold mt-1">Community Management</p>
+</div>
+<nav class="flex-1 px-2 space-y-1 custom-scrollbar overflow-y-auto">
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                Moderation
+            </a>
+<a class="bg-[#004d3e] text-white border-l-4 border-teal-300 px-4 py-3 flex items-center gap-3 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">group</span>
+                Users
+            </a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">policy</span>
+                Policies
+            </a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Config
+            </a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Analytics
+            </a>
+</nav>
+<div class="p-4 border-t border-teal-800 space-y-1">
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all rounded font-medium" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Log Out
+            </a>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center h-16 px-6 ml-60 w-[calc(100%-240px)] bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm sticky top-0 z-30">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="Search by name, email, or handler..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-1 pr-3 rounded-full transition-colors">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="professional headshot of a mature corporate administrator in a dark suit with a neutral office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaFnAZRBsRDbyp4tamiQMd352wttU4phOSB1TL4sdvJV73OdJlgLIH1_gDz1U24OcmWJXeFrLiRiBCo1LjLNwBSDFboYqUtZOetBQNfLnVA8SbE6E8bXVKNETOy0Jab9gnNsxhlCb40_K3hM-_m78PZAnxfKpHxzftHDjsUQuksDM8RtiVW5kbsWR1bYYyAiDD2miw3OPgWTUqRbsZG1Id2ti5hgjqBzMpj7g0rM5BJzBkmDnUxMVS6x1EFSQGt_bHaVfUbPfg3q4"/>
+<span class="font-medium text-sm text-primary">Admin Profile</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-60 p-lg max-w-[1600px]">
+<!-- Header Section -->
+<div class="mb-lg flex items-end justify-between">
+<div>
+<h2 class="font-h1 text-h1 text-on-background">User Management</h2>
+<p class="text-on-surface-variant font-body-sm mt-1">Review, monitor, and manage Omapala's community members.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">person_add</span>
+                    Invite User
+                </button>
+<button class="bg-white border border-outline-variant text-on-surface-variant px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">download</span>
+                    Export CSV
+                </button>
+</div>
+</div>
+<!-- Bento Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-white p-md border border-slate-200 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-slate-500 font-label-caps uppercase">Total Users</span>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<div class="text-2xl font-bold text-on-background">24,512</div>
+<div class="text-[11px] text-green-600 mt-1 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% vs last month
+                </div>
+</div>
+<div class="bg-white p-md border border-slate-200 rounded-xl shadow-sm border-l-4 border-l-error">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-slate-500 font-label-caps uppercase">Suspended</span>
+<span class="material-symbols-outlined text-error">block</span>
+</div>
+<div class="text-2xl font-bold text-on-background">142</div>
+<div class="text-[11px] text-slate-400 mt-1 font-medium italic">Pending review: 8</div>
+</div>
+<div class="bg-white p-md border border-slate-200 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-slate-500 font-label-caps uppercase">Moderators</span>
+<span class="material-symbols-outlined text-tertiary">shield</span>
+</div>
+<div class="text-2xl font-bold text-on-background">28</div>
+<div class="text-[11px] text-slate-500 mt-1 font-medium">Active duty across 12 zones</div>
+</div>
+<div class="bg-white p-md border border-slate-200 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-slate-500 font-label-caps uppercase">New Today</span>
+<span class="material-symbols-outlined text-primary-container">person_add</span>
+</div>
+<div class="text-2xl font-bold text-on-background">89</div>
+<div class="text-[11px] text-green-600 mt-1 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">verified</span> 94% verified rate
+                </div>
+</div>
+</div>
+<!-- Filter & Table Card -->
+<div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+<!-- Table Controls -->
+<div class="p-md bg-slate-50/50 border-b border-slate-100 flex flex-wrap gap-md items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">Filter by:</span>
+<select class="bg-white border border-slate-200 rounded-lg text-xs px-3 py-1.5 focus:ring-1 focus:ring-primary outline-none">
+<option>All Roles</option>
+<option>Admin</option>
+<option>Moderator</option>
+<option>User</option>
+</select>
+<select class="bg-white border border-slate-200 rounded-lg text-xs px-3 py-1.5 focus:ring-1 focus:ring-primary outline-none">
+<option>All Statuses</option>
+<option>Active</option>
+<option>Warned</option>
+<option>Suspended</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<span class="text-[12px] text-slate-500 mr-2">Showing 1-10 of 24,512 users</span>
+<div class="flex border border-slate-200 rounded-lg overflow-hidden">
+<button class="p-1.5 bg-white hover:bg-slate-50 border-r border-slate-200">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1.5 bg-white hover:bg-slate-50">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 border-b border-slate-200">
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">User ID</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">Avatar &amp; Name</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">Handler</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">Status</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">Roles</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider text-center">Warnings</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider">Reg. Date</th>
+<th class="px-md py-3 font-table-header text-table-header text-slate-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- User Row 1 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors group">
+<td class="px-md py-sm font-mono text-xs text-slate-400">#OMP-8821</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200" data-alt="cheerful young woman with a friendly smile, outdoor setting with soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI5R8J8QQqAkoo4HZpNhZKQmXzBxAieT27nvQJ8jfguOKAnRk2c0yvMZEeUu2XP8w5dYbct-FlUHfsSeqaxr3WFRqc3OQVNB8ry66NNVlCfu1i2KTG-eVQHuT-DW1JfJUdMLqukI321lxUo_pc50tOc1MqgIHjfmIYoiPjxCyJ9vAxnB4peKMIGJbaE7_DoQ4wrv4Ov5KYnV89gy7fWh6C0Q9GY3DuWRx-4CUaNyNV9R2MUYVaUAPHj9aqEWmJGjDuAJexChPWfoo"/>
+<div>
+<div class="font-bold text-sm text-on-surface">Elena Rodriguez</div>
+<div class="text-[11px] text-slate-500">elena.ro@gmail.com</div>
+</div>
+</div>
+</td>
+<td class="px-md py-sm text-sm text-primary-container font-medium">@elena_wild</td>
+<td class="px-md py-sm">
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Active</span>
+</td>
+<td class="px-md py-sm">
+<span class="bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold px-2 py-0.5 rounded border border-tertiary-container/20">Admin</span>
+</td>
+<td class="px-md py-sm text-center font-bold text-sm">0</td>
+<td class="px-md py-sm text-xs text-slate-500">Oct 12, 2023</td>
+<td class="px-md py-sm text-right">
+<button class="p-1 hover:bg-white rounded transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors group">
+<td class="px-md py-sm font-mono text-xs text-slate-400">#OMP-9241</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200" data-alt="middle-aged man with short hair and glasses, neutral expression, clean studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUDR7_HkDJkCtt95n5XpWbbQAvOcbtrnHWZQznlhffcYZU5Uv509CnBSRfE3cXOULOvESH1itQp_x1WV6KOOCMlb79xgvlPz7xkiBuh7DP07bcMRpyNGrbRAuonZBwQgPLuJX7_1wamt3qkvZi5EH2zWXVpigCCdn8PMwpZEqnBgmAMdT0fxYM22SSV4FNUXQbTm6pVscfXQtT2gK43bihXN2TO8WL-LRmekz2ibkqjtH0W2S54XqUZe78lrDvXLQldA-lTe3j--g"/>
+<div>
+<div class="font-bold text-sm text-on-surface">Marcus Thorne</div>
+<div class="text-[11px] text-slate-500">m.thorne@omapala.io</div>
+</div>
+</div>
+</td>
+<td class="px-md py-sm text-sm text-primary-container font-medium">@thor_m</td>
+<td class="px-md py-sm">
+<span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Warned</span>
+</td>
+<td class="px-md py-sm">
+<span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-200">User</span>
+</td>
+<td class="px-md py-sm text-center font-bold text-sm text-orange-600">2</td>
+<td class="px-md py-sm text-xs text-slate-500">Jan 05, 2024</td>
+<td class="px-md py-sm text-right">
+<button class="p-1 hover:bg-white rounded transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors group">
+<td class="px-md py-sm font-mono text-xs text-slate-400">#OMP-3112</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200 opacity-50 grayscale" data-alt="close-up of a smiling young man in a casual t-shirt, bright natural lighting, blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAns-g5NVhAERSy_2r_ZkqLNgVWbmLtk2YQ64uSmUg4_25-UKpw7_oKGqSxIuX1EvaePcQMo1UVGL66p6Hh-xmoe7UeJhfYlqGa2mXYQdCVZb9NE1GLC-zWjcWDwH_CmBwMAxlhxgFVRbMGOUDxiiZpmLVd-1wczHWyOnv5tS3R2UIadDoO_vhBvnTKy8a3cxblDhGJFBtawDGvxPiVS964dnwG1FGYXBMbKBLWVu3lkD79pEqNC_fsW6VXkB2H-84QOgzoeGp3-uk"/>
+<div>
+<div class="font-bold text-sm text-slate-500">Sarah Jenkins</div>
+<div class="text-[11px] text-slate-400">s.jenkins@webmail.com</div>
+</div>
+</div>
+</td>
+<td class="px-md py-sm text-sm text-slate-400 font-medium">@sarahj_pro</td>
+<td class="px-md py-sm">
+<span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Suspended</span>
+</td>
+<td class="px-md py-sm">
+<span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-200">User</span>
+</td>
+<td class="px-md py-sm text-center font-bold text-sm text-red-700">5</td>
+<td class="px-md py-sm text-xs text-slate-500">Nov 28, 2022</td>
+<td class="px-md py-sm text-right">
+<button class="p-1 hover:bg-white rounded transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 4 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors group">
+<td class="px-md py-sm font-mono text-xs text-slate-400">#OMP-1142</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200" data-alt="portrait of a professional woman with glasses, smiling confidently in a modern studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG-XNpbEg6klhG1TD_nEgb5aG80xDFeMYYH_MeH0hnBdwt9Mkd5uXoPTUq3JEl2KVGvyl0OHtXGnYWJCrkCvWWaWGXoabxvq20l9yTBHGLPHuuQ2t2fMAlCwxDAsIPaHYUJWBUFvgTs9EGpupgD50YiGsBBcs310QoteMPp2t3POxMvZPAUx1ZYloV1MMglfc00IlgDo6S1vNR9pxUEApEhAf1YMFOJ_xcAKFPcd7BHR7rK9wB6oEavQqN4NJNCnT5kXIX7tw7Z7o"/>
+<div>
+<div class="font-bold text-sm text-on-surface">David Chen</div>
+<div class="text-[11px] text-slate-500">d.chen@corporate.com</div>
+</div>
+</div>
+</td>
+<td class="px-md py-sm text-sm text-primary-container font-medium">@dchen_dev</td>
+<td class="px-md py-sm">
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Active</span>
+</td>
+<td class="px-md py-sm">
+<span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-200">Moderator</span>
+</td>
+<td class="px-md py-sm text-center font-bold text-sm">1</td>
+<td class="px-md py-sm text-xs text-slate-500">Mar 15, 2023</td>
+<td class="px-md py-sm text-right">
+<button class="p-1 hover:bg-white rounded transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 5 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors group">
+<td class="px-md py-sm font-mono text-xs text-slate-400">#OMP-5592</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200" data-alt="pensive looking woman with long dark hair, soft natural side lighting, minimalistic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBdxy-3SC_17IbMwn-jOPjpFWsokk7TwuseliGLNAD9WmuMOUp5RhN0jA5ZQyOmlziLxO_nmzPEZ2uOeD1gadkszx9oHKfn3ncERp5C-UxKcYGg0gmBvRGXQcnff7BKL8ZyXQ550XSZ6F64W2kyAgPJw78IfwTMaQTdiG7ti7sdNpkFi1UvY0fZXXK94LlGfCzcRR49cvWisrCTL1ggDXWrLBtDoRPQmDUBK5MCb1_oNFZcrfBMSfrJPZun3dZ0TXK1bMIJ0Ktrdk"/>
+<div>
+<div class="font-bold text-sm text-on-surface">Amara Okafor</div>
+<div class="text-[11px] text-slate-500">amara.o@global.net</div>
+</div>
+</div>
+</td>
+<td class="px-md py-sm text-sm text-primary-container font-medium">@amaroka</td>
+<td class="px-md py-sm">
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Active</span>
+</td>
+<td class="px-md py-sm">
+<span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-200">User</span>
+</td>
+<td class="px-md py-sm text-center font-bold text-sm">0</td>
+<td class="px-md py-sm text-xs text-slate-500">Feb 02, 2024</td>
+<td class="px-md py-sm text-right">
+<button class="p-1 hover:bg-white rounded transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Context Menu (Positioned for UI Demonstration) -->
+<div class="absolute right-[80px] mt-[-100px] w-48 bg-white shadow-xl border border-slate-200 rounded-lg py-2 z-50 hidden md:block">
+<div class="px-3 py-1 mb-1 border-b border-slate-100">
+<span class="text-[10px] font-bold text-slate-400 uppercase">User Actions</span>
+</div>
+<button class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> View Profile
+                </button>
+<button class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">manage_accounts</span> Change Role
+                </button>
+<button class="w-full text-left px-4 py-2 text-sm text-orange-600 hover:bg-orange-50 flex items-center gap-2 font-medium">
+<span class="material-symbols-outlined text-sm">warning</span> Issue Warning
+                </button>
+<button class="w-full text-left px-4 py-2 text-sm text-error hover:bg-red-50 flex items-center gap-2 font-bold">
+<span class="material-symbols-outlined text-sm">block</span> Suspend Account
+                </button>
+</div>
+<!-- Pagination Footer -->
+<div class="px-md py-sm border-t border-slate-100 flex items-center justify-between bg-slate-50/30">
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-500">Rows per page:</span>
+<select class="bg-transparent border-none text-xs font-bold focus:ring-0 cursor-pointer">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary-container text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200 text-xs font-medium">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200 text-xs font-medium">3</button>
+<span class="px-2">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200 text-xs font-medium">245</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression Rule Active: FAB not rendered for this management screen -->
+</body></html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Moderation Queue - Admin Central</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#6b2e24",
+                        "on-secondary-container": "#5b6764",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-fixed-dim": "#ffb4a7",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#121e1c",
+                        "on-background": "#0b1c30",
+                        "surface": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "primary-fixed-dim": "#87d6bd",
+                        "tertiary-fixed": "#ffdad4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#002018",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#3b0904",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#106b56",
+                        "on-secondary-fixed-variant": "#3d4947",
+                        "on-tertiary-container": "#ffbfb4",
+                        "on-tertiary-fixed-variant": "#73342a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-fixed": "#a2f2d8",
+                        "tertiary-container": "#884439",
+                        "secondary-fixed-dim": "#bcc9c6",
+                        "on-primary-fixed-variant": "#005140",
+                        "outline": "#6f7975",
+                        "primary-container": "#006450",
+                        "inverse-primary": "#87d6bd",
+                        "on-error": "#ffffff",
+                        "secondary": "#55615e",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed": "#d8e5e1",
+                        "secondary-container": "#d8e5e1",
+                        "on-primary-container": "#8edec4",
+                        "outline-variant": "#bec9c3",
+                        "on-surface-variant": "#3f4945",
+                        "inverse-surface": "#213145",
+                        "primary": "#004a3a",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "table-header": ["Inter"],
+                        "mono": ["monospace"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-sm": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "14px", "fontWeight": "700"}],
+                        "table-header": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "mono": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "h2": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-60 border-r border-teal-900 fixed left-0 top-0 bg-[#006450] dark:bg-slate-950 flex flex-col z-40 shadow-xl font-['Inter'] text-sm antialiased">
+<div class="p-lg flex flex-col gap-xs">
+<h1 class="text-xl font-bold tracking-tight text-white">Admin Central</h1>
+<p class="text-xs text-teal-200/60 font-medium">Community Management</p>
+</div>
+<nav class="flex-1 mt-md">
+<!-- Dashboard -->
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Moderation (ACTIVE) -->
+<a class="bg-[#004d3e] text-white border-l-4 border-teal-300 px-4 py-3 flex items-center gap-3 transition-colors duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span>Moderation</span>
+</a>
+<!-- Users -->
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Users</span>
+</a>
+<!-- Policies -->
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined">policy</span>
+<span>Policies</span>
+</a>
+<!-- Config -->
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Config</span>
+</a>
+<!-- Analytics -->
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all duration-150 ease-in-out active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-teal-800">
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<a class="text-teal-100/70 hover:bg-[#005a48] px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center h-16 px-6 ml-60 w-[calc(100%-240px)] sticky top-0 bg-white dark:bg-slate-900 z-30 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 rounded bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-primary-container transition-colors" placeholder="Search moderation reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded cursor-pointer transition-all active:opacity-70">notifications</button>
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded cursor-pointer transition-all active:opacity-70">help_outline</button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200"></div>
+<div class="flex items-center gap-md">
+<span class="font-medium text-slate-700 text-sm">Admin Profile</span>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="close up headshot of a smiling female administrator with glasses in a professional workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC--RJfx-TrEOPsvcUvCzYKppEeaDIMY7Z6NHZwzAyL-GGWW5ztFFUkZfFpjyh9woa26nMrG735_I06lfop7SbUAG941kBcm10W1gqOCVpHk5dedrsgOVelqKI9Wpq6EmELqyfIw2eBKmENUFAaM7WqXO7CaWU6KDGt6Z07n4FTnpGqPwHWhio7UX4FZuvsp6fhBK6miGhUlVqfSqLZqGiSZCSYGymekxzV_KA2ZwEU4_FFZpMo4Jdk_5QHr34u37DsSWF4h8r3ttM"/>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="ml-60 p-lg w-[calc(100%-240px)] flex gap-lg">
+<!-- Left: Queue & Filters -->
+<div class="flex-1 min-w-0 flex flex-col gap-lg">
+<!-- Filter Bar Section -->
+<section class="bg-white border border-outline-variant p-md rounded-lg shadow-sm flex flex-wrap items-end gap-md">
+<div class="flex flex-col gap-base flex-1 min-w-[150px]">
+<label class="font-label-caps text-on-surface-variant uppercase text-[10px]">Status</label>
+<select class="w-full h-8 text-body-sm border-outline-variant rounded focus:ring-0 focus:border-primary-container bg-surface-container-lowest">
+<option>All Statuses</option>
+<option selected="">Pending</option>
+<option>Under Review</option>
+</select>
+</div>
+<div class="flex flex-col gap-base flex-1 min-w-[150px]">
+<label class="font-label-caps text-on-surface-variant uppercase text-[10px]">Flag Reason</label>
+<select class="w-full h-8 text-body-sm border-outline-variant rounded focus:ring-0 focus:border-primary-container bg-surface-container-lowest">
+<option>All Reasons</option>
+<option>Sensitive Content</option>
+<option>Spam</option>
+<option>Harassment</option>
+</select>
+</div>
+<div class="flex flex-col gap-base flex-1 min-w-[150px]">
+<label class="font-label-caps text-on-surface-variant uppercase text-[10px]">Date Range</label>
+<input class="w-full h-8 text-body-sm border-outline-variant rounded focus:ring-0 focus:border-primary-container bg-surface-container-lowest" type="date"/>
+</div>
+<button class="h-8 px-md bg-white border border-outline-variant hover:bg-slate-50 text-body-sm font-semibold rounded flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    More Filters
+                </button>
+</section>
+<!-- Data Table Section -->
+<section class="bg-white border border-outline-variant rounded-lg shadow-sm overflow-hidden">
+<div class="p-md border-b border-slate-100 flex justify-between items-center">
+<h2 class="font-h2 text-on-surface">Queue (124 Items)</h2>
+<div class="flex gap-sm">
+<button class="px-sm py-1 text-label-caps text-on-primary-container bg-primary-container/10 rounded">Bulk Actions</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-md py-3 font-table-header text-on-surface-variant">POST ID</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">AUTHOR</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">CONTENT SNIPPET</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">MEDIA</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">REASON</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">CONFIDENCE</th>
+<th class="px-md py-3 font-table-header text-on-surface-variant">ACTIONS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1: Active Selection -->
+<tr class="hover:bg-[#E8F5F1] bg-[#E8F5F1]/30 transition-colors">
+<td class="px-md py-2 font-mono text-xs text-slate-500">#882193</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="professional portrait of a middle-aged man for user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcH_rjcvQuJnk6hC1iX4yWunBTwAdmnVmZbV228psQUFaPvqXbqHQPVNPzFhqG92auMGKEg0vBruGdIMa5CJnaFQa8MLrLJwq96tC8bKzBHkUn-bm90WSvhBCeFH1DZDANMBLkN4QGJ6waGTl2Rl9cqc97loxALKqvODMYpwYccmdChgviOQBa8ffCAy09k5WHpOUJ_xYRKzqWRSrnl758LteJ0qSFTsVNHeDotBN-Fq7ByRqBuWsxGRimQtSn69gPQc2-rKy1Low"/>
+<span class="text-body-sm font-semibold">David Chen</span>
+</div>
+</td>
+<td class="px-md py-2">
+<p class="text-body-sm text-on-surface-variant line-clamp-1 max-w-[200px]">"The marketing strategy for the upcoming launch is absolutely..."</p>
+</td>
+<td class="px-md py-2">
+<img class="w-10 h-7 rounded object-cover border border-slate-200" data-alt="screenshot of a digital marketing dashboard showing charts and data visualizations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnom5VOC3kBVhWog-NOUeNk1B__nZaZZnxKhoPAskNYJ-154PUTpsfRylWV6cqhhLMAJIM0kFUAJ7VK6IoSMzhq8Qq0nyo-WNl9kJ1ElgGcQAar8zYBLUl-uzV166TeuPTnofuMTr32cOvCA5yoTqkY3vsHq-H8znhn5kBBkBDKrl9T09RYzYzGET9-70TZOg--fmCWrEgOIxOgBl4uS0H6q4YYVVLNnBIsU5gKFG_nE7977xINfPf4pet8bo_gZ6Ne8cCHOwQszQ"/>
+</td>
+<td class="px-md py-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-error-container text-on-error-container">Sensitive Content</span>
+</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-xs">
+<div class="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 94%"></div>
+</div>
+<span class="text-[10px] font-bold text-error">94%</span>
+</div>
+</td>
+<td class="px-md py-2">
+<div class="flex gap-xs">
+<button class="p-1 hover:text-primary-container"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-1 hover:text-green-600"><span class="material-symbols-outlined text-[20px]">check_circle</span></button>
+<button class="p-1 hover:text-error"><span class="material-symbols-outlined text-[20px]">cancel</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors">
+<td class="px-md py-2 font-mono text-xs text-slate-500">#882194</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="close up of a professional woman profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOpArlAQNLxLfAQk7b2pJiCQ9UYNC5yVHCazxSgY3jreD_Mhaxl7cb8t-F-ndb03wjYt5E-xc6bIH80WDJltTrAr5LnUviNnl3wM1oIOdfxZbXH_N1EhnzsJkmfN2Ix4OOVu0iNiPkWmjG883uXjNEnIpfEbA1Yur8D0fjcwNmis1bV3ycyiexU_w0H3ame2Ec9lm14GwspVAmgV_gQmJ0zaHvP0o4bxxdQtNg1jCThA1NhOc552Gv_YVbMwk8qw54d4rHicGCw00"/>
+<span class="text-body-sm font-semibold">Sarah Jenkins</span>
+</div>
+</td>
+<td class="px-md py-2">
+<p class="text-body-sm text-on-surface-variant line-clamp-1 max-w-[200px]">"CLICK HERE FOR FREE ACCESS TO THE NEW SYSTEM EXPLOIT..."</p>
+</td>
+<td class="px-md py-2">
+<span class="text-[10px] text-slate-400 italic">No media</span>
+</td>
+<td class="px-md py-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-amber-100 text-amber-800">Spam</span>
+</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-xs">
+<div class="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full" style="width: 78%"></div>
+</div>
+<span class="text-[10px] font-bold text-amber-600">78%</span>
+</div>
+</td>
+<td class="px-md py-2">
+<div class="flex gap-xs">
+<button class="p-1 hover:text-primary-container"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-1 hover:text-green-600"><span class="material-symbols-outlined text-[20px]">check_circle</span></button>
+<button class="p-1 hover:text-error"><span class="material-symbols-outlined text-[20px]">cancel</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#E8F5F1] transition-colors">
+<td class="px-md py-2 font-mono text-xs text-slate-500">#882195</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="professional male profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWzyIhaWHzR4afZ8hBB1ORd_fsj7cE7ZLBD0RMHuA5qDsvce3N4g8gF89ZqSQ5ySA6hXc4JIvQ__ZSSV00u33DodYnzC4Jpv1wzJF-5mJPoFv8NEGnmIORXK3ACq3M7w3taTXpXTDWI3ucV-VhbnEpY2meP201WibAVJJ9kE6MbYE74qeytgHQaTjErJmcDFcMbSlZznHI0x83v6nsgIOKFd0_Byhyz6tEWLC71NsomAQMBUA3wF4QWpZPOBcAc8jVJRL0X-W6Cq4"/>
+<span class="text-body-sm font-semibold">Mark Thompson</span>
+</div>
+</td>
+<td class="px-md py-2">
+<p class="text-body-sm text-on-surface-variant line-clamp-1 max-w-[200px]">"I honestly think the new policy is a bit restrictive..."</p>
+</td>
+<td class="px-md py-2">
+<span class="text-[10px] text-slate-400 italic">No media</span>
+</td>
+<td class="px-md py-2">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-blue-100 text-blue-800">Harassment</span>
+</td>
+<td class="px-md py-2">
+<div class="flex items-center gap-xs">
+<div class="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full" style="width: 42%"></div>
+</div>
+<span class="text-[10px] font-bold text-blue-600">42%</span>
+</div>
+</td>
+<td class="px-md py-2">
+<div class="flex gap-xs">
+<button class="p-1 hover:text-primary-container"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-1 hover:text-green-600"><span class="material-symbols-outlined text-[20px]">check_circle</span></button>
+<button class="p-1 hover:text-error"><span class="material-symbols-outlined text-[20px]">cancel</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-md border-t border-slate-100 flex items-center justify-between">
+<span class="text-body-sm text-slate-500">Showing 1-25 of 124 results</span>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary-container text-white rounded font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-slate-50 transition-colors font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-slate-50 transition-colors font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right: Detail View Side Panel -->
+<aside class="w-96 flex-shrink-0">
+<div class="bg-white border border-outline-variant rounded-lg shadow-sm sticky top-[88px] flex flex-col h-[calc(100vh-120px)] overflow-hidden">
+<div class="p-md border-b border-slate-100 flex items-center justify-between">
+<h3 class="font-h2 text-on-surface">Item Details</h3>
+<button class="p-1 text-slate-400 hover:text-on-surface"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-lg">
+<!-- Post Header -->
+<div class="flex items-start gap-md">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="professional user portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB14_5yUAw_uro2svk7oaB_FPYbPtq-oX54juaiTva-d8B_UaQH1UP-TDoGPsm2XpkHMXdcKfJ9-_CWWFYPy3kGpsjKP9nb0Hwvt2Ubg_WhRZ8hllEPFR70gflca11il91P3ybyw9HED8Nm4xeMK3lNierVEHibiM-ZbiU1p5i2tpOtveTTkCcPV1c0nMsv0SB0W_QcfNR7D3jjjyStJN8A0EiOy8nU5twNoCkeYwWrMLzDFImQHfC-1d6K1n7tsZkoTQ5BaiVVeis"/>
+<div>
+<p class="font-semibold text-on-surface">David Chen</p>
+<p class="text-xs text-slate-500">Posted: Oct 24, 2023 at 2:15 PM</p>
+</div>
+</div>
+<!-- Full Content -->
+<div class="p-md bg-surface-container-low rounded border border-slate-100">
+<p class="text-body-md text-on-surface leading-relaxed">
+                            The marketing strategy for the upcoming launch is absolutely crucial. We need to focus on high-engagement channels. Confidential details attached below for the team only. Do not share outside this channel. Internal server access: <span class="text-primary-container font-mono">192.168.1.44/secure-vault/</span>
+</p>
+<div class="mt-md rounded overflow-hidden border border-slate-200">
+<img class="w-full h-40 object-cover" data-alt="large view of marketing dashboard with confidential financial data" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3nm0U1BuFWLTVUBsf77bSb2T9P7j12WTLgnA3rGXWBeHBzBO3onsqldxEQgttnpPfZycHYvgTdawsBCDY9Gy5F-0fxEbm6-nIz3YrOpLwsz3NmKOuRQnm9Khqq_hBc3KMCv6s8TVPyxiJR-nZQvbPEsDQTHHYGb6CV3PQ4av5HNzUAClZaAn2X4_MXG07eSsI-gSV-LlEgDmMYr-3qrYttVcDBjWvyuurdsyDdZQmgLr31rztM0tZmGrqjWoPPixQBKh5kPUKocc"/>
+</div>
+</div>
+<!-- Moderation Metadata Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="p-sm bg-slate-50 rounded">
+<p class="font-label-caps text-[10px] text-slate-500 uppercase">Detection Type</p>
+<p class="font-semibold text-xs mt-xs text-on-surface">Auto-Flag (P-01)</p>
+</div>
+<div class="p-sm bg-slate-50 rounded">
+<p class="font-label-caps text-[10px] text-slate-500 uppercase">Risk Level</p>
+<p class="font-semibold text-xs mt-xs text-error">High Priority</p>
+</div>
+<div class="p-sm bg-slate-50 rounded">
+<p class="font-label-caps text-[10px] text-slate-500 uppercase">IP Address</p>
+<p class="font-mono text-xs mt-xs text-on-surface">172.16.254.1</p>
+</div>
+<div class="p-sm bg-slate-50 rounded">
+<p class="font-label-caps text-[10px] text-slate-500 uppercase">Device ID</p>
+<p class="font-mono text-xs mt-xs text-on-surface">MAC-88A2-E1</p>
+</div>
+</div>
+<!-- Previous History -->
+<div>
+<h4 class="font-label-caps text-[10px] text-slate-500 uppercase mb-md">Author History</h4>
+<div class="space-y-sm">
+<div class="flex items-center justify-between text-xs p-xs border-b border-slate-50">
+<span>Previous Violations</span>
+<span class="font-bold">0</span>
+</div>
+<div class="flex items-center justify-between text-xs p-xs border-b border-slate-50">
+<span>Account Age</span>
+<span class="font-bold">2.4 Years</span>
+</div>
+<div class="flex items-center justify-between text-xs p-xs border-b border-slate-50">
+<span>Verification Status</span>
+<span class="text-green-600 font-bold flex items-center gap-xs"><span class="material-symbols-outlined text-xs">verified</span> Verified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-md border-t border-slate-100 bg-slate-50 grid grid-cols-2 gap-md">
+<button class="h-9 bg-white border border-outline text-body-sm font-bold rounded hover:bg-slate-50 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                        Reject
+                    </button>
+<button class="h-9 bg-primary-container text-white text-body-sm font-bold rounded hover:bg-primary transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+                        Approve
+                    </button>
+</div>
+</div>
+</aside>
+</main>
+</body></html>
