@@ -232,9 +232,9 @@ export default async function ReportsPage({
                     >
                       Move to reviewed
                     </FormSubmitButton>
-                    <button className="button-secondary" type="button">
+                    <Link href={`/admin/moderation?item=${selectedReport.targetObjectId}`} className="button-secondary" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", textDecoration: "none" }}>
                       Open target record
-                    </button>
+                    </Link>
                   </div>
                 </form>
               </div>

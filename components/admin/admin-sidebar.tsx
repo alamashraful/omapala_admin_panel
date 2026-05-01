@@ -32,7 +32,6 @@ export function AdminSidebar() {
               href={item.href}
               className={`sidebar-link${isActive ? " sidebar-link-active" : ""}`}
             >
-              <span aria-hidden="true">{item.icon}</span>
               <span>{item.label}</span>
             </Link>
           );
